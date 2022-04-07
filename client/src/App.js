@@ -1,17 +1,22 @@
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Home from "./booking/Home";
+import TopNav from "./components/TopNav";
+
+
 
 
 function App() {
   return (
+    
     <BrowserRouter >
-    <Switch>
-      <Route exact path="/" component={Home}/>
-      <Route exact path="/login" component={Login}/>
-      <Route exact path="/register" component={Register}/>
-    </Switch>
+    <TopNav/>
+    <Routes>
+      <Route exact path="/" element={<Home/>}/>
+      <Route  path="/login" element={<Login/>}/>
+      <Route  path="/register" element={<Register/>}/>
+    </Routes>
     
     </BrowserRouter>
   );
