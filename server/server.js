@@ -20,8 +20,29 @@ mongoose.connect(process.env.DATABASE)
 
 
 //middleware
-app.use(cors());
+app.use(cors(
+//   {
+//     "origin": "*",
+//   "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+//     "credentials": true
+// }
+
+));
+
+app.options('*', cors())
 app.use(morgan('dev'));
+app.use(express.json())
+
+
+
+// set header
+// app.use(function (req, res, next) {
+//     res.setHeader('Access-Control-Allow-Origin', '*');
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+//     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+//     res.setHeader('Access-Control-Allow-Credentials', true);
+//     next();
+//     });
 
 // route middleware
 fs.readdirSync('./routes').map((r) => app.use('/api', require(`./routes/${r}`)))
