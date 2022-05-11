@@ -12,9 +12,10 @@ const Register = () => {
       e.preventDefault();
   
      // console.table({name, email, password})
+     //https://cors-anywhere.herokuapp.com/http://localhost/3010/
 
      try {
-      const res = await axios.post(`https://cors-anywhere.herokuapp.com/http://localhost/3010/api/register`, {
+      const res = await axios.post("http://localhost:3010/api/register", {
         name,
         email,
         password

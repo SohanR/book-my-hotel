@@ -4,6 +4,7 @@ import fs from 'fs';
 import mongoose from 'mongoose';
 require("dotenv").config();
 const morgan = require("morgan");
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 
 
@@ -45,7 +46,7 @@ app.use(express.json())
 //     });
 
 // route middleware
-fs.readdirSync('./routes').map((r) => app.use('/api', require(`./routes/${r}`)))
+fs.readdirSync('./routes').map((r) => app.use('/api', require(`./routes/${r}`), createProxyMiddleware({ target: 'http://localhost:3010', changeOrigin: true })))
 
 
 
