@@ -1,10 +1,20 @@
-import './App.css';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Login from "./auth/Login";
+import Register from "./auth/Register";
+import Home from "./booking/Home";
+import TopNav from "./components/TopNav";
+
 
 function App() {
   return (
-    <div >
-      <h1>Book My Hotel</h1>
-    </div>
+    <BrowserRouter>
+    <TopNav/>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/Login" component={Login} />
+        <Route exact path="/register" component={Register} />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
