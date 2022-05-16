@@ -9,7 +9,8 @@ export const register = async (req, res) => {
 
     //validation
     if(!name) return res.status(400).send("Name is required")
-    if(!password || password.length < 6) return res.status(400).send("Password is required or it should be minimum 6 characters long")
+    if(!password) return res.status(400).send("Password is required")
+    if(password.length < 6) return res.status(400).send("Password should be minimum 6 characters long")
 
     // cant save 2 user with same email
     let userExist = await User.findOne({email}).exec()
