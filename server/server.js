@@ -19,6 +19,7 @@ mongoose.connect(process.env.DATABASE, {
 //middleware
 app.use(cors());
 app.use(morgan("dev"));
+app.use(express.json());
 
 // route middleware
 
