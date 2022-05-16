@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Home from "./booking/Home";
@@ -9,12 +9,14 @@ function App() {
   return (
     <BrowserRouter>
     <TopNav/>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/Login" component={Login} />
-        <Route exact path="/register" component={Register} />
-      </Switch>
+      <Routes>
+        <Route exact path="/" element={<Home/>} />
+        <Route exact path="/login" element={<Login/>} />
+        <Route exact path="/register" element={<Register/>} />
+      </Routes>
     </BrowserRouter>
+    
+    
   );
 }
 
