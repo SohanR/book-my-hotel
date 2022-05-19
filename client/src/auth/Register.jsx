@@ -1,7 +1,7 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { register } from '../actions/auth';
 import RegisterForm from '../components/RegisterForm';
 
 const Register = () => {
@@ -16,9 +16,9 @@ const Register = () => {
     console.table({name, email, password});
 
     try {
-      const res = await axios.post(`${process.env.REACT_APP_API}/register`, {
-      name, email, password
-    })
+      const res = await register({
+        name, email, password
+      })
 
     console.log(" Register User ===>>>" , res);
     toast.success("Registration Success, Please log in!")
