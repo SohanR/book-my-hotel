@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 
 const {Schema} = mongoose;
 
-
+// for registration user
 const userSchema = new Schema({
     name:{
         type:String,
@@ -58,6 +58,27 @@ userSchema.pre('save', function(next){
     }
 
 })
+
+// ---> registation end here
+
+
+// for log in user
+
+// comparing input password with saved password
+userSchema.methods.comparePassword = function (password, next){  // next is a callback fn
+
+    bcrypt.compare(password, this.password, function (err, match){
+        if(err){
+            console.log("COMPARE PASSWORD ERROR: ",err);
+            return next(err, false)
+        }
+        // if no err, we get null
+        console.log("MATHC PASSWORD", match);
+        return next(null, match); // match will return true 
+    })
+}
+
+// ---> log in end here
 
 
 export default mongoose.model("User", userSchema);
