@@ -73,7 +73,7 @@ userSchema.methods.comparePassword = function (password, next){  // next is a ca
             return next(err, false)
         }
         // if no err, we get null
-        console.log("MATHC PASSWORD", match);
+        console.log("MATCH PASSWORD", match);
         return next(null, match); // match will return true 
     })
 }
