@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken';
 import User from "../models/user";
 
 
@@ -60,7 +61,21 @@ export const login = async(req, res) =>{
 
             if(!match || err) return res.status(400).send("Incorrect password")
 
-            console.log('GANERATED A TOKEN THEN SEND AS RESPONSE TO CLIENT');
+            
+            // generate a token then send as response to client
+            let token = jwt.sign({_id:user._id}, process.env.JWT_SECRET, {
+                expiresIn:"7d"
+            });
+
+            res.json({token, user:{
+                _id:user._id,
+                name:user.name,
+                email: user.email,
+                createdAt:user.createdAt,
+                updatedAt: user.updatedAt
+            }})
+
+
         })
             
         
