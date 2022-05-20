@@ -1,5 +1,8 @@
+import jwt from 'jsonwebtoken';
 import User from "../models/user";
 
+
+// for register
 export const register = async (req, res) => {
     console.log(req.body);
 
@@ -33,3 +36,53 @@ export const register = async (req, res) => {
 
 
 }
+
+// for login 
+
+export const login = async(req, res) =>{
+    console.log(req.body);
+
+    const {email, password} = req.body;
+
+
+    try {
+        // check if user with that email exist
+        let user = await User.findOne({email}).exec();
+        console.log('USER EXIST: ', user);
+
+        // if no user
+        if(!user){
+         res.status(400).send("User not found, Please register for log in")        
+        }
+
+        // compare password
+        user.comparePassword(password, (err, match) =>{
+            console.log('COMPARE PASSWORD IN LOG IN ERR: ',err);
+
+            if(!match || err) return res.status(400).send("Incorrect password")
+
+            
+            // generate a token then send as response to client
+            let token = jwt.sign({_id:user._id}, process.env.JWT_SECRET, {
+                expiresIn:"7d"
+            });
+
+            res.json({token, user:{
+                _id:user._id,
+                name:user.name,
+                email: user.email,
+                createdAt:user.createdAt,
+                updatedAt: user.updatedAt
+            }})
+
+
+        })
+            
+        
+        
+    } catch (error) {
+        console.log("LOG IN ERROR", error);
+
+        res.status(400).send("Singin failed")
+    }
+} 
