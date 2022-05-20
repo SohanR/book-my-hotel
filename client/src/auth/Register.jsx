@@ -35,7 +35,7 @@ const Register = () => {
     <>
       <div className='container-fluid h1 p-5 text-center'>
         <h1>Register</h1>
-        {console.log(process.env.REACT_APP_API)}
+       
       </div>
 
       <div className="container" >
