@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { login } from '../actions/auth';
 import LoginForm from '../components/LoginForm';
@@ -12,6 +13,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   
 
   const handleSubmit = async (e) => {
@@ -24,7 +26,7 @@ const Login = () => {
       if(res.data){
 
         // save response data in redux and local storage then redirect
-        console.log("SAVED THEN REDIRECT ===>");
+      
         //console.log(res.data);
 
         // save user and token to local storage
@@ -34,6 +36,10 @@ const Login = () => {
           type:"LOGGED_IN_USER",
           payload:res.data,
         })
+
+        toast.success("Log in successful")
+        //redirect to home page
+        navigate('/')
 
       }
     } catch (error) {
