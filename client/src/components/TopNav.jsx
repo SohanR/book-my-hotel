@@ -26,6 +26,12 @@ const TopNav = () => {
     <div className='nav bg-light d-flex justify-content-between' >
         <Link className="nav-link" to="/">Home</Link>
 
+        {auth !== null && (
+
+          <Link className="nav-link" to="/dashboard">Dashboard</Link>
+
+        )}
+
 
       {auth !== null && (<button  onClick={logout} className="btn btn-outline-danger m-r-3">Logout</button>)}
 
