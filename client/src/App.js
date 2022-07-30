@@ -7,6 +7,7 @@ import Home from "./booking/Home";
 import PrivateRoute from "./components/PrivateRoute";
 import TopNav from "./components/TopNav";
 import Dashboard from "./user/Dashboard";
+import DashboardSeller from "./user/DashboardSeller";
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route exact path="/register" element={<Register/>} />
         <Route path="/*" element={<PrivateRoute/>}>
           <Route path="dashboard" element={<Dashboard/>} />
+          <Route path="dashboard/Seller" element={<DashboardSeller/>} />
         </Route>
       </Routes>
     </BrowserRouter>

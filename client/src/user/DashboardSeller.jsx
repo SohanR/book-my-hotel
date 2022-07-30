@@ -1,27 +1,20 @@
-// show a navbar in dashboard..... it will show 2 components
-// 1 for booking and a button to browse hotels
-// 2 for show all hotels you have posted and a button to add new
-// use tabs as nav
-
-
-
-
 import React from 'react'
 import ConnectNav from '../components/ConnectNav'
 import DashboardNav from '../components/DashboardNav'
 
-const Dashboard = () => {
+const DashboardSeller = () => {
   return (
     <>
         <div className="container-fluid bg-secondary p-5">
             <ConnectNav/>
         </div>
             <DashboardNav/>
+
         <div className="container">
-            <p>Show all bookings and a button to browse hotels</p>
+            <p>Show all Hotels and a add new button to add more hotels</p>
         </div>
     </>
   )
 }
 
-export default Dashboard
+export default DashboardSeller
