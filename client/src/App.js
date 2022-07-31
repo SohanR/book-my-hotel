@@ -6,6 +6,7 @@ import Register from "./auth/Register";
 import Home from "./booking/Home";
 import PrivateRoute from "./components/PrivateRoute";
 import TopNav from "./components/TopNav";
+import NewHotel from "./hotels/NewHotel";
 import Dashboard from "./user/Dashboard";
 import DashboardSeller from "./user/DashboardSeller";
 
@@ -22,6 +23,7 @@ function App() {
         <Route path="/*" element={<PrivateRoute/>}>
           <Route path="dashboard" element={<Dashboard/>} />
           <Route path="dashboard/Seller" element={<DashboardSeller/>} />
+          <Route path="hotels/new" element={<NewHotel/>} />
         </Route>
       </Routes>
     </BrowserRouter>
