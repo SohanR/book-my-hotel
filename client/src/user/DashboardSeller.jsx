@@ -1,3 +1,4 @@
+import { HomeOutlined } from '@ant-design/icons';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -29,8 +30,21 @@ const DashboardSeller = () => {
     return ( 
       <div className="container-fluid">
         <div className='row' >
-          <div className='col-md-10' >
-            <h2>Connect with stripe</h2>
+          <div className='col-md-6 offset-md-3 text-center' >
+          <HomeOutlined className="h1" />
+            <h4>Setup payment method to post rooms</h4>
+            <p className="lead">
+              BookMyHotel partners with stripe to transfer earnings to yours bank account
+            </p>
+            
+            <button className="btn btn-primary mb-3" >
+              Setup Payouts
+            </button>
+            <p className="text-muted">
+              <small>
+                You'll be redirected to Stripe to complete the onboarding process.
+              </small>
+            </p>
           </div>
         </div>          
       </div>   
