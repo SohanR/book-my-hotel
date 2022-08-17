@@ -1,3 +1,4 @@
+import queryString from 'query-string';
 import Stripe from 'stripe';
 import User from '../models/user';
 
@@ -29,7 +30,25 @@ export const createConnectAccount = async (req, res) =>{
     }
 
 
+    // 3. create login link based on account id( for frontend to complete onboarding)
 
-    // 3. create account link based on account id( for frontend to complete onboarding)
+    let accountLink = await stripe.accountLinks.create({
+        account: user.stripe_account_id,
+        refresh_url:process.env.STRIPE_REDIRECT,
+        return_url:process.env.STRIPE_REDIRECT,
+        type:'account_onboarding'
+    })
+
+    // prefill email
+
+    accountLink = Object.assign(accountLink, {
+        "stipe_user[email]":user.email || undefined
+    })
+
+   // console.log("ACCOUNT LINK ", accountLink);
+
+   let link = `${accountLink.url}?${queryString.stringify(accountLink)}`;
+
+   res.send(link)
     // 4. update payment schedule (optional, default is 2 days)
 } 
