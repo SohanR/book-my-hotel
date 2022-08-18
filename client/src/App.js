@@ -7,6 +7,7 @@ import Home from "./booking/Home";
 import PrivateRoute from "./components/PrivateRoute";
 import TopNav from "./components/TopNav";
 import NewHotel from "./hotels/NewHotel";
+import StripeCallback from "./stripe/StripeCallback";
 import Dashboard from "./user/Dashboard";
 import DashboardSeller from "./user/DashboardSeller";
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="dashboard" element={<Dashboard/>} />
           <Route path="dashboard/Seller" element={<DashboardSeller/>} />
           <Route path="hotels/new" element={<NewHotel/>} />
+          <Route path="stripe/callback" element={<StripeCallback/>} />
         </Route>
       </Routes>
     </BrowserRouter>
