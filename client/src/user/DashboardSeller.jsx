@@ -19,6 +19,7 @@ const DashboardSeller = () => {
     try {
       let res = await createConnectAccount(auth.token)
       console.log(res);
+      window.location.href = res.data;  // will open new window with link of stripe onboarding proccess.
     } catch (error) {
       console.log(error);
       toast.error("Stripe connect failed, try again");
