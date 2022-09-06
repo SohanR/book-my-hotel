@@ -89,3 +89,20 @@ export const getAccountStatus = async (req,res) => {
     // console.log(updatedUser);
     res.json(updatedUser);
 } 
+
+
+//getting the account balance
+export const getAccountBalance = async (req, res) =>{
+    const user = await User.findById(req.user._id).exec();
+
+    try {
+        const balance = await stripe.balance.retrieve({
+            stripeAccount: user.stripe_account_id
+        })
+
+        console.log("balance => " , balance);
+        res.json(balance)
+    } catch (error) {
+        console.log(error);
+    }
+}
