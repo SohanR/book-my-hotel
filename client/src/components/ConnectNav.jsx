@@ -7,16 +7,28 @@
 
 import { Avatar, Card } from 'antd';
 import moment from 'moment';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-
+import { getAccountBalance } from '../actions/stripe';
 
 const {Meta} = Card;
 
 const ConnectNav = () => {
 
+  const [balance, setBalance] = useState(0);
   const {auth} = useSelector((state) => state )
   const {user} = auth;
+
+  useEffect(() => {
+    getAccountBalance(auth.token).then(res =>{
+      console.log(res);
+      setBalance(res.data)
+    })
+
+    
+   
+  }, []);
+
   return (
     <div className='d-flex justify-content-around' >
       <Card>
