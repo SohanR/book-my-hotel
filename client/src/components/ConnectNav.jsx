@@ -5,13 +5,14 @@
 */
 
 
-import { Avatar, Card } from 'antd';
+import { Avatar, Badge, Card } from 'antd';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { getAccountBalance } from '../actions/stripe';
+import { currencyFormatter, getAccountBalance } from '../actions/stripe';
 
 const {Meta} = Card;
+const {Ribbon} = Badge;
 
 const ConnectNav = () => {
 
@@ -38,9 +39,15 @@ const ConnectNav = () => {
       {
         auth && auth.user && auth.user.stripe_seller && auth.user.stripe_seller.charges_enabled && (
           <>
-        <div>
-          Pending Balance          
-        </div>
+       <Ribbon text="Available" color='gray'>
+        <Card className="bg-light pt-1 ">
+        {balance && balance.pending && balance.pending.map((ba, i)=>(
+          <span key={i} className="lead" >
+            {currencyFormatter(ba)}
+          </span>
+        )) }
+        </Card>
+       </Ribbon>
 
         <div>
           Payout Settings
