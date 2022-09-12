@@ -5,35 +5,31 @@
 */
 
 
-import { Avatar, Card } from 'antd';
-import moment from 'moment';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import PayoutSetting from './PayoutSetting';
+import PendinBalance from './PendinBalance';
+import UserCard from './UserCard';
 
-
-const {Meta} = Card;
 
 const ConnectNav = () => {
 
+  
   const {auth} = useSelector((state) => state )
   const {user} = auth;
+
+
+
   return (
     <div className='d-flex justify-content-around' >
-      <Card>
-        <Meta avatar={<Avatar shape='circle'  style={{ backgroundColor: 'orange', verticalAlign: 'middle' ,}}> {user.name[0]}</Avatar>} title={user.name} description={`Joined ${moment(user.createdAt).fromNow()}`} />
-      </Card>
-      
+      <UserCard name={user.name} createdAt={user.createdAt} />      
       {
         auth && auth.user && auth.user.stripe_seller && auth.user.stripe_seller.charges_enabled && (
-          <>
-        <div>
-          Pending Balance          
-        </div>
+        <>
+          <PendinBalance token={auth.token} />
 
-        <div>
-          Payout Settings
-        </div>
-      </>
+          <PayoutSetting token={auth.token} />
+        </>
 
         )
       }
