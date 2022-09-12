@@ -5,54 +5,31 @@
 */
 
 
-import { Avatar, Badge, Card } from 'antd';
-import moment from 'moment';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import { currencyFormatter, getAccountBalance } from '../actions/stripe';
+import PayoutSetting from './PayoutSetting';
+import PendinBalance from './PendinBalance';
+import UserCard from './UserCard';
 
-const {Meta} = Card;
-const {Ribbon} = Badge;
 
 const ConnectNav = () => {
 
-  const [balance, setBalance] = useState(0);
+  
   const {auth} = useSelector((state) => state )
   const {user} = auth;
 
-  useEffect(() => {
-    getAccountBalance(auth.token).then(res =>{
-      console.log(res);
-      setBalance(res.data)
-    })
 
-    
-   
-  }, []);
 
   return (
     <div className='d-flex justify-content-around' >
-      <Card>
-        <Meta avatar={<Avatar shape='circle'  style={{ backgroundColor: 'orange', verticalAlign: 'middle' ,}}> {user.name[0]}</Avatar>} title={user.name} description={`Joined ${moment(user.createdAt).fromNow()}`} />
-      </Card>
-      
+      <UserCard name={user.name} createdAt={user.createdAt} />      
       {
         auth && auth.user && auth.user.stripe_seller && auth.user.stripe_seller.charges_enabled && (
-          <>
-       <Ribbon text="Available" color='gray'>
-        <Card className="bg-light pt-1 ">
-        {balance && balance.pending && balance.pending.map((ba, i)=>(
-          <span key={i} className="lead" >
-            {currencyFormatter(ba)}
-          </span>
-        )) }
-        </Card>
-       </Ribbon>
+        <>
+          <PendinBalance token={auth.token} />
 
-        <div>
-          Payout Settings
-        </div>
-      </>
+          <PayoutSetting token={auth.token} />
+        </>
 
         )
       }
