@@ -18,7 +18,8 @@ const PayoutSetting = ({token}) => {
 
     try {
       const res = await payoutSetting(token)
-      console.log("payout settings response", res);
+      //console.log("payout settings response", res);
+      window.location.href = res.data.url;
       setLoading(false);
     } catch (error) {
       console.log("payout settings error", error);
