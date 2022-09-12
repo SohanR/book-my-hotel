@@ -33,3 +33,10 @@ export const currencyFormatter = data =>{
     currency:data.currency
     })
 }
+
+// stripe payout settings 
+export const payoutSetting = async (token) => await axios.post(`${process.env.REACT_APP_API}/payout-setting`, {},{
+    headers: {
+        Authorization: `Bearer ${token}`
+    }
+})
