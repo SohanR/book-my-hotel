@@ -14,6 +14,8 @@ const NewHotel = () => {
     bed:''
   });
 
+  const [preview, setpreview] = useState("https://via.placeholder.com/150/?text=PREVIEW");
+
   //destructuring values
   const {title,content,location,image,price,from,to,bed} = values;
 
@@ -23,17 +25,20 @@ const NewHotel = () => {
 
   }
 
-  const handleImageChange = () =>{
+  const handleImageChange = (e) =>{
+    //console.log( e.target.files[0]);
+    setpreview(URL.createObjectURL(e.target.files[0]));
+    setValues({...values, image:e.target.files[0]})
 
   }
 
-  const handleChange = () =>{
-
+  const handleChange = (e) =>{
+    setValues({...values, [e.target.name] : e.target.value })
   }
 
 
   const hotelForm = () =>(
-    <from onSubmit={handleSubmit} >
+    <form onSubmit={handleSubmit} >
       <div className='form-group' >
         <label  className='btn btn-outline-secondary btn-block m-2 text-left'>
           Image
@@ -50,7 +55,7 @@ const NewHotel = () => {
       </div>
 
       <button className='btn btn-outline-primary m-2' >Save</button>
-    </from>
+    </form>
   )
 
   return (
@@ -68,7 +73,8 @@ const NewHotel = () => {
             </div>
 
             <div className='col-md-2' >
-              image <pre>{JSON.stringify(values, null, 4)}</pre>
+                <img src={preview} alt="preview_img" className='img img-fluid m-2'/>
+               <pre>{JSON.stringify(values, null, 4)}</pre>
             </div>
           </div>
         </div> 
