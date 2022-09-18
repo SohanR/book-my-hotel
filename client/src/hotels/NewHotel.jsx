@@ -1,6 +1,7 @@
 import AlgoliaPlaces from 'algolia-places-react';
+import { DatePicker } from 'antd';
+import moment from 'moment';
 import React, { useState } from 'react';
-
 
 const config = {
   appId:process.env.REACT_APP_ALGOLIA_APP_ID,
@@ -64,6 +65,24 @@ const NewHotel = () => {
 
         <input type="number" name="bed" onChange={handleChange} placeholder='Number of Beds' className='form-control m-2' value={bed} />
       </div>
+
+      <DatePicker 
+        placeholder='From Date' 
+        className='form-control m-2' 
+        onChange={( date, dateString ) => 
+          setValues({...values, from:dateString})}  
+        disabledDate={(current) => 
+          current && current.valueOf() < moment().subtract(1, 'days')}
+        />
+
+      <DatePicker 
+        placeholder='To Date' 
+        className='form-control m-2' 
+        onChange={( date, dateString ) => 
+          setValues({...values, to:dateString})} 
+        disabledDate={(current) => 
+          current && current.valueOf() <   moment().subtract(1, 'days')}
+      />
 
       <button className='btn btn-outline-primary m-2' >Save</button>
     </form>
