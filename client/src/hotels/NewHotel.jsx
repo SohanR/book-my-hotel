@@ -1,4 +1,12 @@
+import AlgoliaPlaces from 'algolia-places-react';
 import React, { useState } from 'react';
+
+
+const config = {
+  appId:process.env.REACT_APP_ALGOLIA_APP_ID,
+  apiKey:process.env.REACT_APP_ALGOLIA_API_KEY,
+}
+
 
 const NewHotel = () => {
 
@@ -48,6 +56,9 @@ const NewHotel = () => {
         <input type="text" name="title" onChange={handleChange} placeholder='Title' className='form-control m-2' value={title} />
 
         <textarea type="text" name="content" onChange={handleChange} placeholder='Content' className='form-control m-2' value={content} />
+
+        <AlgoliaPlaces className='form-control ml-2 mr-2' placeholder='location' defaultValue={location} optiona={config} onChange={({suggestion}) => setValues({...values, location: suggestion.value}) } style={{height:"50px"}}
+        />
 
         <input type="number" name="price" onChange={handleChange} placeholder='Price' className='form-control m-2' value={price} />
 
