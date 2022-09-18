@@ -1,5 +1,5 @@
 import AlgoliaPlaces from 'algolia-places-react';
-import { DatePicker } from 'antd';
+import { DatePicker, Select } from 'antd';
 import moment from 'moment';
 import React, { useState } from 'react';
 
@@ -7,6 +7,8 @@ const config = {
   appId:process.env.REACT_APP_ALGOLIA_APP_ID,
   apiKey:process.env.REACT_APP_ALGOLIA_API_KEY,
 }
+
+const {Option} = Select;
 
 
 const NewHotel = () => {
@@ -63,7 +65,17 @@ const NewHotel = () => {
 
         <input type="number" name="price" onChange={handleChange} placeholder='Price' className='form-control m-2' value={price} />
 
-        <input type="number" name="bed" onChange={handleChange} placeholder='Number of Beds' className='form-control m-2' value={bed} />
+        {/* <input type="number" name="bed" onChange={handleChange} placeholder='Number of Beds' className='form-control m-2' value={bed} /> */}
+
+        <Select onChange={(value) => setValues({...values, bed:value })} className='w-100 m-2' placeholder='Number of Beds' >
+          <Option key={1} >1</Option>
+          <Option key={2} >2</Option>
+          <Option key={3} >3</Option>
+          <Option key={4} >4</Option>
+
+          
+        </Select>
+
       </div>
 
       <DatePicker 
