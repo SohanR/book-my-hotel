@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import HotelForm from '../components/HotelForm';
 
 // const config = {
@@ -10,6 +11,10 @@ import HotelForm from '../components/HotelForm';
 
 
 const NewHotel = () => {
+
+  //redux
+  const {auth} = useSelector(state => state);
+  const {token} = auth;
   
 //state
 const [values, setValues] = useState({
@@ -41,7 +46,7 @@ const [values, setValues] = useState({
             <div className='col-md-10' >
               <br />
               
-             <HotelForm values={values} setValues={setValues} setpreview={setPreview} />
+             <HotelForm values={values} setValues={setValues} setpreview={setPreview} toekn={token}/>
             </div>
 
             <div className='col-md-2' >
