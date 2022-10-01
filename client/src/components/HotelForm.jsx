@@ -1,22 +1,41 @@
 import { DatePicker, Select } from 'antd';
 import moment from 'moment';
 import React from 'react';
+import { toast } from 'react-toastify';
+import { createHotel } from '../actions/hotel';
 
 const {Option} = Select;
 
-const HotelForm = ({values, setValues, setPreview}) => {
+const HotelForm = ({values, setValues, setPreview, token}) => {
 
   //destructuring values
   const {title,content,location,image,price,from,to,bed} = values;
 
-      //event handler
-  const handleSubmit = (e) =>{
-    e.preventDefault();
-    console.log(values);
+  //event handler
+  const handleSubmit =async (e) =>{
+    // e.preventDefault();
+    //console.log(values);
 
+    let hotelData = new FormData()
+    hotelData.append('title',title)
+    hotelData.append('content',content)
+    hotelData.append('location',location)
+    hotelData.append('price',price)
+    image && hotelData.append('image',image)
+    hotelData.append('from',from)
+    hotelData.append('to',to)
+    hotelData.append('bed',bed)
+
+    console.log([...hotelData]);
+
+    let res = await createHotel(token, hotelData)
+
+    console.log('HOTELE CREATE RES', res);
+    toast('New Hotel Is Posted')
+    setTimeout(() =>{
+      window.location.reload()
+    },10000)
   }
-
-
 
   const handleChange = (e) =>{
     setValues({...values, [e.target.name] : e.target.value })
