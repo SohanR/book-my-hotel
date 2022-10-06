@@ -13,7 +13,7 @@ const HotelForm = ({values, setValues, setPreview, token}) => {
 
   //event handler
   const handleSubmit =async (e) =>{
-    // e.preventDefault();
+    e.preventDefault();
     //console.log(values);
 
     let hotelData = new FormData()
@@ -34,7 +34,7 @@ const HotelForm = ({values, setValues, setPreview, token}) => {
     toast('New Hotel Is Posted')
     setTimeout(() =>{
       window.location.reload()
-    },10000)
+    },5000)
   }
 
   const handleChange = (e) =>{
@@ -83,7 +83,7 @@ const HotelForm = ({values, setValues, setPreview, token}) => {
     </div>
 
     <DatePicker 
-      format="DD/MM/YYYY"
+     
       placeholder='From Date' 
       className='form-control m-2' 
       onChange={( date, dateString ) => 
@@ -93,7 +93,7 @@ const HotelForm = ({values, setValues, setPreview, token}) => {
       />
 
     <DatePicker 
-      format="DD/MM/YYYY"
+      
       placeholder='To Date' 
       className='form-control m-2' 
       onChange={( date, dateString ) => 
