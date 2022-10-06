@@ -46,7 +46,7 @@ const [values, setValues] = useState({
             <div className='col-md-10' >
               <br />
               
-             <HotelForm values={values} setValues={setValues} setpreview={setPreview} toekn={token}/>
+             <HotelForm values={values} setValues={setValues} setPreview={setPreview} token={token}/>
             </div>
 
             <div className='col-md-2' >
