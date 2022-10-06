@@ -28,7 +28,7 @@ const hotelSchema = new Schema({
         ref:"User"
     },
     image:{
-        type:Buffer,
+        data:Buffer,
         contentType:String        
     },
     from:{
