@@ -1,14 +1,18 @@
 import express from 'express';
+import formidable from 'express-formidable';
 
 const router = express.Router();
 
 
-//controller
+// middleware
+import { requireSingin } from "../middlewares";
 
+//controller
 import { create } from "../controllers/hotel";
 
 
-router.post("/create-hotel",create );
+
+router.post("/create-hotel",requireSingin, formidable(),  create );
 
 
 module.exports = router;
