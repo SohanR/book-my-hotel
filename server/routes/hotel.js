@@ -8,11 +8,13 @@ const router = express.Router();
 import { requireSingin } from "../middlewares";
 
 //controller
-import { create } from "../controllers/hotel";
+import { create, hotels } from "../controllers/hotel";
 
 
 
 router.post("/create-hotel",requireSingin, formidable(),  create );
+
+router.get("/hotels", hotels)
 
 
 module.exports = router;
