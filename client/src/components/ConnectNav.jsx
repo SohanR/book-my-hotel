@@ -7,9 +7,9 @@
 
 import React from 'react';
 import { useSelector } from 'react-redux';
+import UserCard from './cards/UserCard';
 import PayoutSetting from './PayoutSetting';
 import PendinBalance from './PendinBalance';
-import UserCard from './UserCard';
 
 
 const ConnectNav = () => {
