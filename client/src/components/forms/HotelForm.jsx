@@ -2,7 +2,7 @@ import { DatePicker, Select } from 'antd';
 import moment from 'moment';
 import React from 'react';
 import { toast } from 'react-toastify';
-import { createHotel } from '../actions/hotel';
+import { createHotel } from './../../actions/hotel';
 
 const {Option} = Select;
 
@@ -28,13 +28,22 @@ const HotelForm = ({values, setValues, setPreview, token}) => {
 
     console.log([...hotelData]);
 
-    let res = await createHotel(token, hotelData)
 
-    console.log('HOTELE CREATE RES', res);
-    toast('New Hotel Is Posted')
-    setTimeout(() =>{
-      window.location.reload()
-    },5000)
+    try {
+      let res = await createHotel(token, hotelData)
+
+      console.log('HOTELE CREATE RES', res);
+      toast.success('New Hotel Is Posted')
+      setTimeout(() =>{
+        window.location.reload()
+      },5000)
+      
+    } catch (error) {
+      console.log("hotel saving error", error);
+      toast.error(error.response.data)
+    }
+
+
   }
 
   const handleChange = (e) =>{

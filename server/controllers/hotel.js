@@ -1,6 +1,7 @@
 import fs from "fs";
 import Hotel from "../models/hotel";
 
+// for creating hotels
 export const create = async (req,res) =>{
     // console.log("Hotel create field", req.fields);
     // console.log("Hotel create file", req.files);
@@ -42,4 +43,29 @@ export const create = async (req,res) =>{
         })
     }
 
+}
+
+
+// for getting hotels
+
+export const hotels = async (req, res) =>{
+    let all = await Hotel.find({})
+    .limit(24)
+    .select('-image.data')
+    .populate('postedBy', '_id name')
+    .exec();
+    
+    console.log(all);
+    res.json(all);
+    
+}
+
+//for getting hotel image
+export const image = async (req, res) =>{
+    let hotel = await Hotel.findById(req.params.hotelId).exec();
+
+    if(hotel && hotel.image && hotel.image.data !== null){
+        res.set("Content-Type", hotel.image.contentType);
+        return res.send(hotel.image.data);
+    }
 }

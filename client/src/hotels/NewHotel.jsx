@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import HotelForm from '../components/HotelForm';
+import HotelForm from '../components/forms/HotelForm';
 
 // const config = {
 //   appId:process.env.REACT_APP_ALGOLIA_APP_ID,
