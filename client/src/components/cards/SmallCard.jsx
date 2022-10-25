@@ -3,6 +3,7 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { diffDays } from '../../actions/hotel'
 import { currencyFormatter } from '../../actions/stripe'
+import HotelImage from '../HotelImage'
 
 const SmallCard = ({h}) => {
 
@@ -16,7 +17,7 @@ const SmallCard = ({h}) => {
         <div className='card mb-3' > {console.log(h.title)}
             <div className='row no-gutter'>
                 <div className='col-md-4'>
-                    <img className='card-image img img-fluid' src="https://via.placeholder.com/900x500/?text=Book+My+Hotel" alt="hotel" />
+                <HotelImage h={h} />
                 </div>
 
                 <div className='col-md-8'>
