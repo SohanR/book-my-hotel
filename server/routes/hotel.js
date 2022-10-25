@@ -8,13 +8,15 @@ const router = express.Router();
 import { requireSingin } from "../middlewares";
 
 //controller
-import { create, hotels } from "../controllers/hotel";
+import { create, hotels, image } from "../controllers/hotel";
 
 
 
 router.post("/create-hotel",requireSingin, formidable(),  create );
 
 router.get("/hotels", hotels)
+
+router.get("/hotel/image/:hotelId", image);
 
 
 module.exports = router;
