@@ -5,13 +5,10 @@ import { diffDays } from '../../actions/hotel'
 import { currencyFormatter } from '../../actions/stripe'
 import HotelImage from '../HotelImage'
 
-const SmallCard = ({h}) => {
+const SmallCard = ({h, handleHotelDelete = (f) => f, owner = false, showViewMoreButton = true}) => {
 
   const navigate = useNavigate()
 
-  const handleHotelDelete = () => {
-    return null
-  }
   return (
     <>
         <div className='card mb-3' > {console.log(h.title)}
@@ -46,17 +43,25 @@ const SmallCard = ({h}) => {
 
                     {/* conditional buttton */}
                     <div className='d-flex justify-content-between h4' >
-                    <button className='btn btn-info' onClick={()=> navigate(`hotel/${h._id}`)} >
-                      Show more
-                    </button>
-
-                      <Link to={`hotel/edit/${h._id}`} >
-                        <EditOutlined className='text-warning' />
-                      </Link>
-                      <div>
-                      <DeleteOutlined className='text-danger' onClick={()=>handleHotelDelete(h._id)} />
-
-                      </div>
+                      {
+                        showViewMoreButton && (
+                          <button className='btn btn-info' onClick={()=> navigate(`hotel/${h._id}`)} >
+                            Show more
+                          </button>
+                        )
+                      }
+                    {
+                      owner && (
+                        <>
+                        <Link to={`hotel/edit/${h._id}`} >
+                          <EditOutlined className='text-warning' />
+                        </Link>
+                        <div>
+                          <DeleteOutlined className='text-danger' onClick={()=>handleHotelDelete(h._id)} />
+                        </div>
+                        </>
+                      )
+                    }
                     </div>
 
                   </div>                    
