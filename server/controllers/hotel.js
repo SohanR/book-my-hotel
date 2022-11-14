@@ -4,7 +4,7 @@ import Hotel from "../models/hotel";
 // for creating hotels
 export const create = async (req,res) =>{
     // console.log("Hotel create field", req.fields);
-    console.log("Hotel --------------> ", req.auth._id);
+    // console.log("Hotel create file", req.files);
 
 
     try {

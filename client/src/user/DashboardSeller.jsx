@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { sellerHotels } from '../actions/hotel';
 import { createConnectAccount } from '../actions/stripe';
+import SmallCard from '../components/cards/SmallCard';
 import ConnectNav from '../components/ConnectNav';
 import DashboardNav from '../components/DashboardNav';
 
@@ -49,7 +50,7 @@ const DashboardSeller = () => {
       <div className="container-fluid">
       <div className='row' >
         <div className='col-md-10' >
-          <h2>Your Bookings</h2>
+          <h2>Your Hotels</h2>
         </div>
         <div className='col-md-2'>
           <Link to='/hotels/new' className='btn btn-primary' > + Add Hotel</Link>
@@ -57,7 +58,11 @@ const DashboardSeller = () => {
       </div> 
 
       <div className='row' >
-        <pre>{JSON.stringify(hotels, null, 4)}</pre>
+        {
+          hotels.map((h)=>(
+            <SmallCard key={h._id} h={h} owner={true} />
+          ))
+        }
       </div>         
     </div>
     )
