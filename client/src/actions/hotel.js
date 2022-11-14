@@ -23,3 +23,10 @@ export const diffDays = (from, to) => {
     return difference;
     
 }
+
+// for seller hotels data
+export const sellerHotels = async (token) => await axios.get(`${process.env.REACT_APP_API}/seller-hotels`, {
+    headers:{
+        Authorization: `Bearer ${token}`
+    }
+});

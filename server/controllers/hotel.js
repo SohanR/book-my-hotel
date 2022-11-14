@@ -4,7 +4,7 @@ import Hotel from "../models/hotel";
 // for creating hotels
 export const create = async (req,res) =>{
     // console.log("Hotel create field", req.fields);
-    // console.log("Hotel create file", req.files);
+    console.log("Hotel --------------> ", req.auth._id);
 
 
     try {
@@ -13,6 +13,7 @@ export const create = async (req,res) =>{
         let files = req.files
 
         let hotel = new Hotel(fields)
+        hotel.postedBy = req.auth._id;
 
         // handle image
         if(files.image){
@@ -73,7 +74,7 @@ export const image = async (req, res) =>{
 
 // for getting seller hotels data
 export const sellerHotels = async (req, res) =>{
-    let all = await Hotel.find({postedBy:req.user._id})
+    let all = await Hotel.find({postedBy:req.auth._id})
     .select('-image.data')
     .populate('postedBy', '_id name')
     .exec();
