@@ -1,8 +1,9 @@
 import { HomeOutlined } from '@ant-design/icons';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { sellerHotels } from '../actions/hotel';
 import { createConnectAccount } from '../actions/stripe';
 import ConnectNav from '../components/ConnectNav';
 import DashboardNav from '../components/DashboardNav';
@@ -11,6 +12,17 @@ const DashboardSeller = () => {
 
   const {auth} = useSelector((state) => state);
   const [loading, setLoading] = useState(false);
+  const [hotels, setHotels] = useState([]);
+
+  // for loading the all seller hotels if exist
+  useEffect(() =>{
+    loadSellerHotels();
+  },[])
+
+  const loadSellerHotels = async () => {
+    let {data} = await sellerHotels(auth.token);
+    setHotels(data);
+  }
 
   // handle setup payouts button click
   const handleClick = async () =>{
@@ -42,7 +54,11 @@ const DashboardSeller = () => {
         <div className='col-md-2'>
           <Link to='/hotels/new' className='btn btn-primary' > + Add Hotel</Link>
         </div>
-      </div>          
+      </div> 
+
+      <div className='row' >
+        <pre>{JSON.stringify(hotels, null, 4)}</pre>
+      </div>         
     </div>
     )
   }
