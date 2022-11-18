@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { sellerHotels } from '../actions/hotel';
+import { deleteHotel, sellerHotels } from '../actions/hotel';
 import { createConnectAccount } from '../actions/stripe';
 import SmallCard from '../components/cards/SmallCard';
 import ConnectNav from '../components/ConnectNav';
@@ -44,6 +44,15 @@ const DashboardSeller = () => {
 
   }
 
+  const handleHotelDelete  = async (hotelId) =>{
+    if(!window.confirm("Are you sure you want to delete this Hotel?")) return;
+    deleteHotel(auth.token, hotelId)
+    .then((res) =>{
+      toast.success("Hotel Deleted")
+      loadSellerHotels()
+    })
+  }
+
   // for stripe connected
   const connected = () =>{
     return (
@@ -60,7 +69,7 @@ const DashboardSeller = () => {
       <div className='row' >
         {
           hotels.map((h)=>(
-            <SmallCard key={h._id} h={h} owner={true} />
+            <SmallCard key={h._id} h={h} owner={true}  handleHotelDelete={handleHotelDelete} />
           ))
         }
       </div>         
