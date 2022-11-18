@@ -89,3 +89,14 @@ export const remove = async (req, res) =>{
 
     res.json(removed);
 }
+
+// for getting single hotel data
+export const read = async (req, res) =>{
+    let hotel = await Hotel.findById(req.params.hotelId)
+    .select("-image.data")
+    .exec();
+
+    console.log("single hotel data = ", hotel);
+
+    res.json(hotel);
+}
