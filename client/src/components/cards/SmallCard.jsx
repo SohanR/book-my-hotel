@@ -45,7 +45,7 @@ const SmallCard = ({h, handleHotelDelete = (f) => f, owner = false, showViewMore
                     <div className='d-flex justify-content-between h4' >
                       {
                         showViewMoreButton && (
-                          <button className='btn btn-info' onClick={()=> navigate(`hotel/${h._id}`)} >
+                          <button className='btn btn-info' onClick={()=> navigate(`/hotel/${h._id}`)} >
                             Show more
                           </button>
                         )
@@ -53,7 +53,7 @@ const SmallCard = ({h, handleHotelDelete = (f) => f, owner = false, showViewMore
                     {
                       owner && (
                         <>
-                        <Link to={`hotel/edit/${h._id}`} >
+                        <Link to={`/hotel/edit/${h._id}`} >
                           <EditOutlined className='text-warning' />
                         </Link>
                         <div>
