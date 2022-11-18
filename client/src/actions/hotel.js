@@ -30,3 +30,11 @@ export const sellerHotels = async (token) => await axios.get(`${process.env.REAC
         Authorization: `Bearer ${token}`
     }
 });
+
+
+// delete hotel
+export const deleteHotel = async (token, hotelId) => await axios.delete(`${process.env.REACT_APP_API}/delete-hotel/${hotelId}`, {
+    headers :{
+        Authorization : `Bearer ${token}`
+    }
+} )
