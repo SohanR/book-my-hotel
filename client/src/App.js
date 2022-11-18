@@ -6,6 +6,7 @@ import Register from "./auth/Register";
 import Home from "./booking/Home";
 import PrivateRoute from "./components/PrivateRoute";
 import TopNav from "./components/TopNav";
+import EditHotels from "./hotels/EditHotels";
 import NewHotel from "./hotels/NewHotel";
 import StripeCallback from "./stripe/StripeCallback";
 import Dashboard from "./user/Dashboard";
@@ -25,6 +26,7 @@ function App() {
           <Route path="dashboard" element={<Dashboard/>} />
           <Route path="dashboard/Seller" element={<DashboardSeller/>} />
           <Route path="hotels/new" element={<NewHotel/>} />
+          <Route path="hotel/edit/:hotelId" element={<EditHotels/>} />
           <Route path="stripe/callback" element={<StripeCallback/>} />
         </Route>
       </Routes>
