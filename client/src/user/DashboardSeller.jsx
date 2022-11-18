@@ -48,7 +48,7 @@ const DashboardSeller = () => {
     if(!window.confirm("Are you sure you want to delete this Hotel?")) return;
     deleteHotel(auth.token, hotelId)
     .then((res) =>{
-      toast.success("Hotel Deleted")
+      toast.success(`${res.data.title} is Deleted`)
       loadSellerHotels()
     })
   }
