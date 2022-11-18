@@ -38,3 +38,7 @@ export const deleteHotel = async (token, hotelId) => await axios.delete(`${proce
         Authorization : `Bearer ${token}`
     }
 } )
+
+
+// fetch single hotel
+export const read = async (hotelId) => await axios.get(`${process.env.REACT_APP_API}/hotel/${hotelId}`);
