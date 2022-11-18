@@ -81,3 +81,11 @@ export const sellerHotels = async (req, res) =>{
 
     res.send(all);
 }
+
+
+// remove hotel from database
+export const remove = async (req, res) =>{
+    let removed = await Hotel.findByIdAndDelete(req.params.hotelId).select("-image.data").exec();
+
+    res.json(removed);
+}
