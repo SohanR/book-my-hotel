@@ -81,3 +81,22 @@ export const sellerHotels = async (req, res) =>{
 
     res.send(all);
 }
+
+
+// remove hotel from database
+export const remove = async (req, res) =>{
+    let removed = await Hotel.findByIdAndDelete(req.params.hotelId).select("-image.data").exec();
+
+    res.json(removed);
+}
+
+// for getting single hotel data
+export const read = async (req, res) =>{
+    let hotel = await Hotel.findById(req.params.hotelId)
+    .select("-image.data")
+    .exec();
+
+    console.log("single hotel data = ", hotel);
+
+    res.json(hotel);
+}
