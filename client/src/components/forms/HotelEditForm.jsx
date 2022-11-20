@@ -1,20 +1,25 @@
 import { DatePicker, Select } from 'antd';
 import moment from 'moment';
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { createHotel } from '../../actions/hotel';
+import { updateHotel } from '../../actions/hotel';
 
 const {Option} = Select;
 
-const HotelEditForm = ({values, setValues, setPreview, token}) => {
+const HotelEditForm = ({values, setValues, setPreview, token, hotelId}) => {
+
+
+  const navigate = useNavigate();
 
   //destructuring values
-  const {title,content,location,image,price,from,to,bed} = values;
+  const {title,content,location,price,from,to,bed} = values;
+  
+  const [image, setImage] = useState("");
 
   //event handler
-  const handleSubmit =async (e) =>{
+  const handleSubmit = async (e) =>{
     e.preventDefault();
-    //console.log(values);
 
     let hotelData = new FormData()
     hotelData.append('title',title)
@@ -26,25 +31,19 @@ const HotelEditForm = ({values, setValues, setPreview, token}) => {
     hotelData.append('to',to)
     hotelData.append('bed',bed)
 
-    console.log([...hotelData]);
+    try{
+        let res = await updateHotel(token, hotelData, hotelId)
+        console.log("hotel update response", res);
+
+        toast.success(`${res.data.title} is updated`)
+        navigate('/dashboard/seller')
 
 
-    try {
-      let res = await createHotel(token, hotelData)
-
-      console.log('HOTELE CREATE RES', res);
-      toast.success('New Hotel Is Posted')
-      setTimeout(() =>{
-        window.location.reload()
-      },5000)
-      
-    } catch (error) {
-      console.log("hotel saving error", error);
-      toast.error(error.response.data)
+    } catch(err){
+        console.log(err);
+        toast.error(err.response.data)
     }
-
-
-  }
+}
 
   const handleChange = (e) =>{
     setValues({...values, [e.target.name] : e.target.value })
@@ -53,7 +52,7 @@ const HotelEditForm = ({values, setValues, setPreview, token}) => {
   const handleImageChange = (e) =>{
     //console.log( e.target.files[0]);
     setPreview(URL.createObjectURL(e.target.files[0]));
-    setValues({...values, image:e.target.files[0]})
+    setImage(e.target.files[0])
 
   }
 
