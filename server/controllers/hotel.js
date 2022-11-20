@@ -100,3 +100,35 @@ export const read = async (req, res) =>{
 
     res.json(hotel);
 }
+
+// for update hotel data
+export const update = async (req, res) =>{
+    try {
+        let fields = req.fields;
+        let files = req.files;
+
+        let data = {...fields}
+
+        //if image available
+        if (files.image){
+            let image = {};
+
+            image.data = fs.readFileSync(files.image.path);
+            image.contentType = files.image.type
+
+            data.image = image;
+        }
+
+        let updated = await Hotel.findByIdAndUpdate(req.params.hotelId, data, {
+            new:true
+        }).select("-image.data");
+
+        res.json(updated)
+
+
+    } catch (error) {
+         console.log(error);
+
+        res.status(400).send("Hotel update failed, try again.")
+    }    
+}

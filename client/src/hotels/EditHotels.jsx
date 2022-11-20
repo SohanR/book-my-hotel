@@ -15,8 +15,7 @@ const EditHotels = () => {
     const [values, setValues] = useState({
         title: '',
         content: '',
-        location: '',
-        image: '',
+        location: '',        
         price: '',
         from: '',
         to: '',
@@ -25,7 +24,6 @@ const EditHotels = () => {
 
       const [preview, setPreview] = useState("https://via.placeholder.com/150/?text=PREVIEW");
 
-      const {title,content,location,image,price,from,to,bed} = values;
 
     const {hotelId} = useParams()
     useEffect(() =>{
@@ -40,21 +38,6 @@ const EditHotels = () => {
 
     }
 
-    const handleSubmit = async (e) =>{
-        //
-    }
-
-    const handleChange = (e) =>{
-        setValues({...values, [e.target.name] : e.target.value })
-      }
-    
-      const handleImageChange = (e) =>{
-        //console.log( e.target.files[0]);
-        setPreview(URL.createObjectURL(e.target.files[0]));
-        setValues({...values, image:e.target.files[0]})
-    
-      }
-
 
   return (
     <>
@@ -66,7 +49,7 @@ const EditHotels = () => {
             <div className="row" >
                 <div className="col-md-10">
                     <br />
-                    <HotelEditForm values={values} setValues={setValues} setPreview={setPreview} token={token}/>
+                    <HotelEditForm values={values} setValues={setValues} setPreview={setPreview} token={token} hotelId={hotelId} />
                 </div>
                 <div className="col-md-2" >
                     <img className="img img-fluid m-2" src={preview} alt="preview img" />
