@@ -1,14 +1,19 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 import { diffDays, read } from '../actions/hotel';
 
 const ViewHotel = () => {
+
+    const {auth} = useSelector((state) => state )
+    
 
     const [hotel, setHotel] = useState({});
     const [image, setImage] = useState("");
 
     const {hotelId} = useParams()
+    const navigate = useNavigate();
 
     useEffect(() => {
         loadHotel()
@@ -21,6 +26,14 @@ const ViewHotel = () => {
         setHotel(res.data)
         setImage(`${process.env.REACT_APP_API}/hotel/image/${res.data._id}`)
 
+    }
+
+    const handleClick = (e) =>{
+        e.preventDefault();
+
+        if(!auth){
+            navigate("/login")
+        }
     }
 
   return (
@@ -65,7 +78,9 @@ const ViewHotel = () => {
                     <br />
 
                 
-                    <button className='btn btn-block btn-lg btn-primary mt-3 ' >Book Now</button>
+                    <button onClick={handleClick} className='btn btn-block btn-lg btn-primary mt-3 ' >
+                        {auth && auth.token ? "Book Now" : "Login to Book"}
+                    </button>
                 </div>
             </div>
         </div>
