@@ -1,5 +1,6 @@
 import queryString from 'query-string';
 import Stripe from 'stripe';
+import hotel from '../models/hotel';
 import User from '../models/user';
 
 const stripe = Stripe(process.env.STRIPE_SECRET);
@@ -126,26 +127,46 @@ export const payoutSetting = async (req, res) =>{
 
 // strip Session Id
 export const stripSessionId = async (req, res) =>{
-    
+
+    //hotel id
+    const {hotelId} = req.body
+
+    //find hotel based on hotelid
+    const item = await hotel.findById(hotelId).select('-image.data').populate("postedBy").exec();
+
+    //20% charge as app fee 
+    const fee = (item.price * 20)/100
+
+    //create session     
     const session = await stripe.checkout.sessions.create({
         payment_method_types:['card'],
+        //purchase details
         line_items:[
             {
-                name:'Hotel Booking',
-                amount:100000,
+                name:item.title,
+                amount:item.price * 100,
                 currency:'bdt',
                 quantity:1
             }
         ],
+        //payment intent and 80% charge
         payment_intent_data:{
-            application_fee_amount:123,
+            application_fee_amount:fee * 100,            
             transfer_data:{
-                destination:'acct_1LXpvI2EqaPA2CcW'
+                destination:item.postedBy.stripe_account_id
             }
         },
         success_url:process.env.STRIPE_SUCCESS_URL,
         cancel_url:process.env.STRIPE_CANCEL_URL
     })
 
-    console.log("stripe session", session);
+    await User.findByIdAndUpdate(req.auth._id,{stripeSession:session}).exec();
+
+    res.send({
+        sessionId:session.id
+    })
 }
+
+
+    // add session in db 
+    //send session id to frontend    
