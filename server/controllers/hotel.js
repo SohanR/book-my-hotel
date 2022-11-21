@@ -93,6 +93,7 @@ export const remove = async (req, res) =>{
 // for getting single hotel data
 export const read = async (req, res) =>{
     let hotel = await Hotel.findById(req.params.hotelId)
+    .populate("postedBy", "_id name")
     .select("-image.data")
     .exec();
 
