@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { diffDays, read } from '../actions/hotel';
+import { getSessionId } from '../actions/stripe';
 
 const ViewHotel = () => {
 
@@ -28,12 +29,16 @@ const ViewHotel = () => {
 
     }
 
-    const handleClick = (e) =>{
+    const handleClick =async (e) =>{
         e.preventDefault();
 
         if(!auth){
             navigate("/login")
         }
+
+        let res = await getSessionId(auth.token, hotelId);
+
+        console.log("get getSessionId=> ", res.data.sessionId);
     }
 
   return (
