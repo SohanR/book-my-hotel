@@ -123,3 +123,29 @@ export const payoutSetting = async (req, res) =>{
         console.log("STRIPE PAYOUT SETTING ERR =>",error);
     }
 }
+
+// strip Session Id
+export const stripSessionId = async (req, res) =>{
+    
+    const session = await stripe.checkout.sessions.create({
+        payment_method_types:['card'],
+        line_items:[
+            {
+                name:'Hotel Booking',
+                amount:100000,
+                currency:'bdt',
+                quantity:1
+            }
+        ],
+        payment_intent_data:{
+            application_fee_amount:123,
+            transfer_data:{
+                destination:'acct_1LXpvI2EqaPA2CcW'
+            }
+        },
+        success_url:process.env.STRIPE_SUCCESS_URL,
+        cancel_url:process.env.STRIPE_CANCEL_URL
+    })
+
+    console.log("stripe session", session);
+}
