@@ -1,9 +1,11 @@
+import { loadStripe } from '@stripe/stripe-js';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { diffDays, read } from '../actions/hotel';
 import { getSessionId } from '../actions/stripe';
+import HotelImage from '../components/HotelImage';
 
 const ViewHotel = () => {
 
@@ -12,6 +14,7 @@ const ViewHotel = () => {
 
     const [hotel, setHotel] = useState({});
     const [image, setImage] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const {hotelId} = useParams()
     const navigate = useNavigate();
@@ -31,12 +34,22 @@ const ViewHotel = () => {
 
     const handleClick =async (e) =>{
         e.preventDefault();
+        setLoading(true)
 
         if(!auth){
             navigate("/login")
         }
 
         let res = await getSessionId(auth.token, hotelId);
+
+        //load srtipe
+        const stripe  = await loadStripe(process.env.REACT_APP_STRIPE_KEY)
+
+        stripe.redirectToCheckout({
+            sessionId:res.data.sessionId
+        })
+        .then((resul) => console.log(resul))
+
 
         console.log("get getSessionId=> ", res.data.sessionId);
     }
@@ -52,7 +65,7 @@ const ViewHotel = () => {
                 <div className="col-md-6">
                     <br />
 
-                    <img src={image} alt={hotel.title} className="img img-fluid m-2" />
+                    <HotelImage h={hotel} />
                 </div>
 
                 <div className="col-md-6">
@@ -83,8 +96,8 @@ const ViewHotel = () => {
                     <br />
 
                 
-                    <button onClick={handleClick} className='btn btn-block btn-lg btn-primary mt-3 ' >
-                        {auth && auth.token ? "Book Now" : "Login to Book"}
+                    <button onClick={handleClick} className='btn btn-block btn-lg btn-primary mt-3 ' disabled={loading} >
+                        {loading ? "Loading..." : auth && auth.token ? "Book Now" : "Login to Book"}
                     </button>
                 </div>
             </div>
