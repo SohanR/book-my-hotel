@@ -1,6 +1,6 @@
 import { Badge, Card } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { currencyFormatter, getAccountBalance } from '../actions/stripe';
+import { getAccountBalance } from '../actions/stripe';
 
 const {Ribbon} = Badge;
 
@@ -23,7 +23,7 @@ const PendinBalance = ({token}) => {
     <Card className="bg-light pt-1 ">
       {balance && balance.pending && balance.pending.map((ba, i)=>(
         <span key={i} className="lead" >
-          {currencyFormatter(ba)}
+          BDT {ba.amount}
         </span>
       )) }
     </Card>
