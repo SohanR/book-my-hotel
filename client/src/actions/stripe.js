@@ -48,3 +48,9 @@ export const getSessionId = async (token,hotelId) => await axios.post(`${process
         }
     }
 )
+
+export const stripeSuccessRequest = async (token,hotelId) => await axios.post(`${process.env.REACT_APP_API}/stripe-success`, {hotelId}, {
+    headers: {
+        Authorization: `Bearer ${token}`
+    }
+} )
