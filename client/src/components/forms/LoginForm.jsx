@@ -20,7 +20,7 @@ const LoginForm = ({ handleSubmit, email, setEmail, password, setPassword }) => 
             <input 
                 type="password"
                 className="form-control"
-                placeholder="Enter your Name"
+                placeholder="Enter your Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}            
             />
