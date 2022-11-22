@@ -156,7 +156,7 @@ export const stripSessionId = async (req, res) =>{
                 destination:item.postedBy.stripe_account_id
             }
         },
-        success_url:process.env.STRIPE_SUCCESS_URL,
+        success_url:`${process.env.STRIPE_SUCCESS_URL}/${hotelId}`,
         cancel_url:process.env.STRIPE_CANCEL_URL
     })
 

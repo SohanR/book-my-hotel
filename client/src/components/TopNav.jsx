@@ -24,7 +24,7 @@ const TopNav = () => {
 
   return (
     <div className='nav bg-light d-flex justify-content-between' >
-        <Link className="nav-link" to="/">Home</Link>
+        <Link className="nav-link" to="http://localhost:3001/">Home</Link>
 
         {auth !== null && (
 
