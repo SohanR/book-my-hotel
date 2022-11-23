@@ -8,7 +8,7 @@ const router = express.Router();
 import { hotelOwner, requireSingin } from "../middlewares";
 
 //controller
-import { create, hotels, image, read, remove, sellerHotels, update } from "../controllers/hotel";
+import { create, hotels, image, read, remove, sellerHotels, update, userHotelBookings } from "../controllers/hotel";
 
 
 
@@ -25,5 +25,7 @@ router.delete('/delete-hotel/:hotelId', requireSingin, hotelOwner, remove);
 router.get("/hotel/:hotelId", read);
 
 router.put("/update-hotel/:hotelId", requireSingin, formidable(), hotelOwner, update);
+
+router.get('/user-hotel-bookings', requireSingin, userHotelBookings)
 
 module.exports = router;
