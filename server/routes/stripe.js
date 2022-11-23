@@ -8,7 +8,7 @@ const router = express.Router();
 // middleware
 import { requireSingin } from "../middlewares";
 // controller
-import { createConnectAccount, getAccountBalance, getAccountStatus, payoutSetting, stripSessionId } from "../controllers/stripe";
+import { createConnectAccount, getAccountBalance, getAccountStatus, payoutSetting, stripeSuccess, stripSessionId } from "../controllers/stripe";
 
 
 
@@ -22,5 +22,8 @@ router.post("/get-account-balance", requireSingin, getAccountBalance )
 router.post("/payout-setting", requireSingin, payoutSetting)
 
 router.post("/stripe-session-id", requireSingin, stripSessionId)
+
+//order 
+router.post("/stripe-success", requireSingin, stripeSuccess)
 
 module.exports = router;
