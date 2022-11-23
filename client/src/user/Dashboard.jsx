@@ -10,6 +10,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { userHotelBookings } from '../actions/hotel'
+import BookingCard from '../components/cards/BookingCard'
 import ConnectNav from '../components/ConnectNav'
 import DashboardNav from '../components/DashboardNav'
 
@@ -52,7 +53,13 @@ const Dashboard = () => {
           </div>    
 
           <div className="row">
-            <pre>{JSON.stringify(booking,null,4)}</pre>  
+            {
+              booking.map(b =>(
+                <BookingCard key={b._id} hotel={b.hotel} session={b.session} orderedBy={b.orderedBy} />
+              ))
+            } 
+
+            {/* <pre>{JSON.stringify(booking,null,4)}</pre> */}
           </div>      
         </div>
     </>
