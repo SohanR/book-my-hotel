@@ -49,3 +49,18 @@ export const updateHotel = async (token, data, hotelId) => await axios.put(`${pr
         Authorization : `Bearer ${token}`
     }
 } )
+
+// get user hotel booking data
+export const userHotelBookings = async (token) => await axios.get(`${process.env.REACT_APP_API}/user-hotel-bookings/`,{
+    headers:{
+        Authorization: `Bearer ${token}`
+    }
+});
+
+
+// already booked
+export const isAlreadyBooked = async (token, hotelId) => await axios.get(`${process.env.REACT_APP_API}/is-already-booked/${hotelId}`,{
+    headers:{
+        Authorization: `Bearer ${token}`
+    }
+})

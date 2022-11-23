@@ -3,7 +3,7 @@ import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { diffDays, read } from '../actions/hotel';
+import { diffDays, isAlreadyBooked, read } from '../actions/hotel';
 import { getSessionId } from '../actions/stripe';
 import HotelImage from '../components/HotelImage';
 
@@ -13,8 +13,10 @@ const ViewHotel = () => {
     
 
     const [hotel, setHotel] = useState({});
-    const [image, setImage] = useState("");
+
     const [loading, setLoading] = useState(false);
+
+    const [alreadyBooked, setAlreadyBooked] = useState(false);
 
     const {hotelId} = useParams()
     const navigate = useNavigate();
@@ -23,12 +25,20 @@ const ViewHotel = () => {
         loadHotel()
     }, []);
 
+    useEffect(() => {
+        if(auth && auth.token){
+            isAlreadyBooked(auth.token, hotelId)
+            .then(res =>{
+                if(res.data.ok) setAlreadyBooked(true)
+            })            
+        }
+    },[])
+
 
     const loadHotel = async () =>{
         let res = await read(hotelId)
 
         setHotel(res.data)
-        setImage(`${process.env.REACT_APP_API}/hotel/image/${res.data._id}`)
 
     }
 
@@ -96,8 +106,8 @@ const ViewHotel = () => {
                     <br />
 
                 
-                    <button onClick={handleClick} className='btn btn-block btn-lg btn-primary mt-3 ' disabled={loading} >
-                        {loading ? "Loading..." : auth && auth.token ? "Book Now" : "Login to Book"}
+                    <button onClick={handleClick} className='btn btn-block btn-lg btn-primary mt-3 ' disabled={loading || alreadyBooked} >
+                        {loading ? "Loading..." : alreadyBooked ? "Already Booked" : auth && auth.token ? "Book Now" : "Login to Book"}
                     </button>
                 </div>
             </div>
