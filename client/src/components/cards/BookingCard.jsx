@@ -1,8 +1,11 @@
-import React from 'react'
-import { diffDays } from '../../actions/hotel'
-import HotelImage from '../HotelImage'
+import React, { useState } from 'react';
+import { diffDays } from '../../actions/hotel';
+import HotelImage from '../HotelImage';
+import OrderModal from '../modals/OrderModal';
 
 const BookingCard = ( {hotel, session, orderedBy} ) => {
+
+    const [showModal, setShowModal] = useState(false);
   return (
     <>
         <div className='card mb-3' >
@@ -32,14 +35,14 @@ const BookingCard = ( {hotel, session, orderedBy} ) => {
                       Available from {new Date(hotel.from).toLocaleDateString()}
                     </p>
 
+                    
+                    {showModal && <OrderModal session={session} orderedBy={orderedBy} showModal={showModal} setShowModal={setShowModal} />}
                   
                     <div className='d-flex justify-content-between h4' >
                       
-                          <button className='btn btn-info'>
-                            Show more
+                          <button className='btn btn-info' onClick={() =>setShowModal(!showModal)} >
+                            Show Payment info
                           </button>
-                       
-                
                     </div>
 
                   </div>                    
