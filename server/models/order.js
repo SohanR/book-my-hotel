@@ -12,6 +12,6 @@ const orderSchema = new mongoose.Schema({
         type:ObjectId,
         ref:"User"
     },
-}{timestamps:true})
+},{timestamps:true})
 
-module.exports = mongoose.model("Order",orderSchema);
+export default mongoose.model("Order", orderSchema);
