@@ -1,5 +1,6 @@
 import fs from "fs";
 import Hotel from "../models/hotel";
+import order from "../models/order";
 
 // for creating hotels
 export const create = async (req,res) =>{
@@ -132,4 +133,16 @@ export const update = async (req, res) =>{
 
         res.status(400).send("Hotel update failed, try again.")
     }    
+}
+
+
+// get user hotel bookings
+export const userHotelBookings = async (req, res) => {
+    const all = await order.find({orderedBy: req.auth._id})
+    .select('session')
+    .populate('hotel', '-image.data')
+    .populate('orderedBy','_id name')
+    .exec()
+
+    res.json(all);
 }
