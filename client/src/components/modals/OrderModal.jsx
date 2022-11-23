@@ -4,7 +4,7 @@ import React from 'react';
 const OrderModal = ({session, orderedBy, showModal, setShowModal}) => {
   return (
    <Modal title='Payment information' visible={showModal} onCancel={() =>setShowModal(!showModal)}  footer={null} >
-    <pre>{JSON.stringify(session,null,4)}</pre>
+    
 
     <p>Payment Intent: {session.payment_intent}</p>
     <p>Payment Status:{session.payment_status === 'paid' ? <b className='text-success' > {session.payment_status.toUpperCase()}</b>:<b className='text-danger'>{session.payment_status.toUpperCase()}</b>}  </p>
