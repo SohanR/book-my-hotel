@@ -22,7 +22,7 @@ const Hotels = () => {
   return (
     <>
       <div className='container-fluid p-5 text-center' >
-        <h1>All Hotels</h1>
+        <h1>Featured Hotels</h1>
       </div>
 
       <div className='col'>
