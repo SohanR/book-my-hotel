@@ -166,3 +166,15 @@ export const isAlreadyBooked = async (req, res) => {
         ok:ids.includes(hotelId)
     })
 }
+
+
+export const searchListings = async (req, res) =>{
+    const {location,date,bed} = req.body
+    
+    //console.log(location,date,bed);
+    let result = await Hotel.find({from:{$gte: new Date()}, to:{$gte:new Date()}, location})
+    .select("-image.data")
+    .exec()
+
+    res.json(result)
+}
