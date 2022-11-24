@@ -54,7 +54,7 @@ const Dashboard = () => {
 
           <div className="row">
             {
-              booking.map(b =>(
+            booking && booking.map(b =>(
                 <BookingCard key={b._id} hotel={b.hotel} session={b.session} orderedBy={b.orderedBy} />
               ))
             } 
