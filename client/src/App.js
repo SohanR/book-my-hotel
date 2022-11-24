@@ -9,6 +9,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import TopNav from "./components/TopNav";
 import EditHotels from "./hotels/EditHotels";
 import NewHotel from "./hotels/NewHotel";
+import SearchResult from "./hotels/SearchResult";
 import ViewHotel from "./hotels/ViewHotel";
 import StripeCallback from "./stripe/StripeCallback";
 import StripeCancel from "./stripe/StripeCancel";
@@ -28,6 +29,7 @@ function App() {
         <Route exact path="/login" element={<Login/>} />
         <Route exact path="/register" element={<Register/>} />
         <Route exact path="/hotel/:hotelId" element={<ViewHotel/>} />
+        <Route exact path="/search-result" element={<SearchResult/>} />
         <Route path="/*" element={<PrivateRoute/>}>
           <Route path="dashboard" element={<Dashboard/>} />
           <Route path="dashboard/Seller" element={<DashboardSeller/>} />
