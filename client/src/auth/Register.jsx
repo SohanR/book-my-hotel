@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { register } from '../actions/auth';
 import RegisterForm from '../components/forms/RegisterForm';
@@ -34,7 +34,7 @@ const Register = () => {
   return (
     <>
       <div className='container-fluid h1 p-5 text-center'>
-        <h1>Register</h1>
+        <h1>Registration</h1>
        
       </div>
 
@@ -52,6 +52,7 @@ const Register = () => {
             />
           </div>
         </div>
+        <p style={{textAlign: 'center',marginTop: '20px'}} >Already have account ? <Link to='/login'>Log in</Link> </p>
       </div>
     </>
   )

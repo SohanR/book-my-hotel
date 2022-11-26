@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { login } from '../actions/auth';
 import LoginForm from '../components/forms/LoginForm';
@@ -65,7 +65,9 @@ const Login = () => {
                 setPassword={setPassword}
               />
             </div>
-          </div>      
+          </div>   
+
+           <p style={{textAlign: 'center',marginTop: '20px'}} >Don't have any account ? <Link to='/register'>Sign Up</Link> </p>   
         </div>    
     </>
   )
