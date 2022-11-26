@@ -1,0 +1,42 @@
+.topnav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  img {
+    cursor: pointer;
+  }
+}
+.account {
+  display: flex;
+  gap: 3rem;
+  list-style-type: none;
+  margin-right: 100px;
+  margin-left: -100px;
+}
+
+.dashboard {
+  margin: auto;
+}
+
+.toggle {
+  display: none;
+}
+
+.links {
+  display: flex;
+  gap: 3rem;
+  list-style-type: none;
+
+  .navlink {
+    text-decoration: none !important;
+    color: black;
+    cursor: pointer;
+    transition: var(--default-transition);
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+}

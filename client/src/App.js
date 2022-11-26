@@ -5,6 +5,7 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Home from "./booking/Home";
 import Hotels from "./booking/Hotels";
+import Footer from "./components/Footer";
 import PrivateRoute from "./components/PrivateRoute";
 import TopNav from "./components/TopNav";
 import EditHotels from "./hotels/EditHotels";
@@ -40,6 +41,7 @@ function App() {
           <Route path="stripe/cancel" element={<StripeCancel/>} />
         </Route>
       </Routes>
+      <Footer/>
     </BrowserRouter>
     
     
