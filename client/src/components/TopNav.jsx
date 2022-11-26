@@ -1,14 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { BsPerson } from "react-icons/bs"
+import { GiHamburgerMenu } from 'react-icons/gi'
+import { MdClose } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-
+import Logo from "../assets/logo.png"
+import './../styles/topNav/topNav.css'
 
 const TopNav = () => {
 
   const { auth } = useSelector((state) => ({...state}))
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isNavOpen, setIsNavOpen] = useState(false);
+  const html = document.querySelector("html");
+  html.addEventListener("click", (e) => setIsNavOpen(false));
 
   // log out functionality
   const logout = () =>{
@@ -23,35 +30,57 @@ const TopNav = () => {
 
 
   return (
-    <div className='nav bg-light d-flex justify-content-between' >
-        <Link className="nav-link" to="http://localhost:3001/">Home</Link>
 
-        {auth !== null && (
+    <div className='topnav' state={isNavOpen ? 1 : 0} id='up'>
 
-          <Link className="nav-link" to="/dashboard">Dashboard</Link>
-
+      <div className="brand">
+        <img height='70px' src={Logo} alt="logo" />
+      </div>
+      <div className="toggle">
+        {isNavOpen ? (
+          <MdClose onClick={() => setIsNavOpen(false)} />
+        ) : (
+          <GiHamburgerMenu
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsNavOpen(true);
+            }}
+          />
         )}
+      </div>
 
+      <div className={`links ${isNavOpen ? "show" : ""}`} >
+        <Link className="navlink" to="/">Home</Link>
+        <Link className="navlink" to="/hotels"> Hotels</Link>
+        <Link className="navlink" to="/#offer">Offer</Link>
+        <Link className="navlink" to="/#tour">Tour</Link>
+        <Link className="navlink" to="/#blog">Blog</Link>
+        
+    </div>
 
-      {auth !== null && (<button  onClick={logout} className="btn btn-outline-danger m-r-3">Logout</button>)}
+<div className='account' >
+{auth !== null && (
+            <Link className="dashboard" to="/dashboard"><BsPerson /> Dashboard</Link>
+          )}
+          {auth !== null && (
+              <button  onClick={logout} className="btn btn-outline-danger m-r-3">Logout</button>
+            )
+          }
+          {auth === null && (
+            <>
+              <Link className="nl" to="/login"><BsPerson /> Login</Link>
 
+              <Link className="nl" to="/register">Sign Up</Link>
+            </>
+          )}
+</div>
 
-
-
-
-
-
-        {auth === null && (
-          <>
-            <Link className="nav-link" to="/login">Login</Link>
-
-            <Link className="nav-link" to="/register">Register</Link>
-          </>
-        )}
 
 
     </div>
+    // style={{display: 'flex',gap: '3rem', listStyleType: 'none',marginRight: '100px',marginLeft: '-100px'}}
   )
 }
+
 
 export default TopNav
