@@ -1,0 +1,54 @@
+.topnav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.brand img {
+  cursor: pointer;
+}
+
+.account {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 3rem;
+  list-style-type: none;
+  margin-right: 100px;
+  margin-left: -100px;
+}
+
+.dashboard {
+  margin: auto;
+}
+
+.toggle {
+  display: none;
+}
+
+.links {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 3rem;
+  list-style-type: none;
+}
+
+.links .navlink {
+  text-decoration: none !important;
+  color: black;
+  cursor: pointer;
+  -webkit-transition: var(--default-transition);
+  transition: var(--default-transition);
+}
+
+.links .navlink:hover {
+  color: var(--primary-color);
+}
+/*# sourceMappingURL=topNav.css.map */
