@@ -52,9 +52,9 @@ const TopNav = () => {
       <div className={`links ${isNavOpen ? "show" : ""}`} >
         <Link className="navlink" to="/">Home</Link>
         <Link className="navlink" to="/hotels"> Hotels</Link>
-        <Link className="navlink" to="/#offer">Offer</Link>
-        <Link className="navlink" to="/#tour">Tour</Link>
-        <Link className="navlink" to="/#blog">Blog</Link>
+        <Link className="navlink" to="/offer">Offer</Link>
+        <Link className="navlink" to="/tour">Tour</Link>
+        <Link className="navlink" to="/testimonial">Testimonial</Link>
         
     </div>
 

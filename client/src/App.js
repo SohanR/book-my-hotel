@@ -6,8 +6,11 @@ import Register from "./auth/Register";
 import Home from "./booking/Home";
 import Hotels from "./booking/Hotels";
 import Footer from "./components/Footer";
+import Offer from "./components/Offer";
 import PrivateRoute from "./components/PrivateRoute";
+import Testimonial from "./components/Testimonial";
 import TopNav from "./components/TopNav";
+import Tours from "./components/Tours";
 import EditHotels from "./hotels/EditHotels";
 import NewHotel from "./hotels/NewHotel";
 import SearchResult from "./hotels/SearchResult";
@@ -27,6 +30,9 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home/>} />
         <Route exact path="/hotels" element={<Hotels/>} />
+        <Route exact path="/offer" element={<Offer />} />
+        <Route exact path="/testimonial" element={<Testimonial />} />
+        <Route exact path="/tour" element={<Tours />} />
         <Route exact path="/login" element={<Login/>} />
         <Route exact path="/register" element={<Register/>} />
         <Route exact path="/hotel/:hotelId" element={<ViewHotel/>} />
