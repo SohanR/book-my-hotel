@@ -32,7 +32,7 @@ const Register = () => {
         }
       }
     } else{
-      toast.error("Name contains letters only!!!")
+      toast.error("Name contain letters only!!!")
     }
       
    }
