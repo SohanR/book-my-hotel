@@ -30,7 +30,7 @@ const RegisterForm = ({ handleSubmit, name, setName, email, setEmail, password, 
             <input 
                 type="password"
                 className="form-control"
-                placeholder="Enter your Name"
+                placeholder="Enter your Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}            
             />
