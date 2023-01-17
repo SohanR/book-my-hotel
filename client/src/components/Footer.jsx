@@ -29,7 +29,7 @@ const Footer = () => {
               <img src={logo} alt="logo" />
             </div>
             <p className="desciption">
-              You can dream, create, design, and build the most wonderful place.
+              
             </p>
           </div>
           <ul>
@@ -39,9 +39,7 @@ const Footer = () => {
             <li>
               <span>support@bookmyhotel.com</span>
             </li>
-            <li>
-              <span>www.youtube.com</span>
-            </li>
+
           </ul>
         </div>
         <div className="col">
