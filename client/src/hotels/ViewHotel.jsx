@@ -1,6 +1,7 @@
 import { loadStripe } from '@stripe/stripe-js';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
+import { BiBed } from 'react-icons/bi';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { diffDays, isAlreadyBooked, read } from '../actions/hotel';
@@ -18,6 +19,10 @@ const ViewHotel = () => {
 
     const [alreadyBooked, setAlreadyBooked] = useState(false);
 
+    const [hotelOwner, setHotelOwner] = useState(false);
+
+    const [checkOut, setCheckOut] = useState(false);
+
     const {hotelId} = useParams()
     const navigate = useNavigate();
 
@@ -32,6 +37,11 @@ const ViewHotel = () => {
                 if(res.data.ok) setAlreadyBooked(true)
             })            
         }
+
+        if(auth && auth.user && auth.user.name === hotel.postedBy && hotel.postedBy.name){
+            setHotelOwner(true)
+        }
+        
     },[])
 
 
@@ -39,6 +49,8 @@ const ViewHotel = () => {
         let res = await read(hotelId)
 
         setHotel(res.data)
+
+        
 
     }
 
@@ -83,6 +95,8 @@ const ViewHotel = () => {
                     <b>{hotel.content}</b>
                     <p className='alert alert-info mt-3' > BDT {hotel.price}.00  </p>
 
+                    <p className="card-text"> <BiBed/> {hotel.bed} Bed</p>
+
                     <p className="card-text">
                       <span className='float-right text-primary' >
                          for {diffDays(hotel.from, hotel.to)}
@@ -105,10 +119,19 @@ const ViewHotel = () => {
                     
                     <br />
 
-                
-                    <button onClick={handleClick} className='btn btn-block btn-lg btn-primary mt-3 ' disabled={loading || alreadyBooked} >
-                        {loading ? "Loading..." : alreadyBooked ? "Already Booked" : auth && auth.token ? "Book Now" : "Login to Book"}
+                    {
+                        !hotelOwner && <button onClick={handleClick} className='btn btn-block btn-lg btn-primary mt-3 ' disabled={loading || alreadyBooked} >
+                        {loading ? "Loading..." : alreadyBooked ? "Already Booked" : auth && auth.token ? "Book Now" : "Login to Book"  }
                     </button>
+                    }
+
+                    {/* {
+
+                        alreadyBooked && <button onClick={handleClick} className='btn btn-block btn-lg btn-primary mt-3' disabled={checkOut} >{ checkOut ? "Check Out" : "Cheaked out" }</button>
+                    } */}
+
+
+                    
                 </div>
             </div>
         </div>

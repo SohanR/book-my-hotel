@@ -36,7 +36,7 @@ const HotelEditForm = ({values, setValues, setPreview, token, hotelId}) => {
         console.log("hotel update response", res);
 
         toast.success(`${res.data.title} is updated`)
-        navigate('/dashboard/seller')
+        navigate('/user/dashboard/seller')
 
 
     } catch(err){

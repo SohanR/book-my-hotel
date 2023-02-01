@@ -62,7 +62,7 @@ const DashboardSeller = () => {
           <h2>Your Hotels</h2>
         </div>
         <div className='col-md-2'>
-          <Link to='/hotels/new' className='btn btn-primary' > + Add Hotel</Link>
+          <Link to='/user/hotels/new' className='btn btn-primary' > + Add Hotel</Link>
         </div>
       </div> 
 

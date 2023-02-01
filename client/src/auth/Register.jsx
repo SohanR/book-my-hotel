@@ -5,7 +5,7 @@ import { register } from '../actions/auth';
 import RegisterForm from '../components/forms/RegisterForm';
 
 const Register = () => {
-  const validName = new RegExp(/^[a-z][a-z\s]*$/);
+  const validName = new RegExp(/^[A-Za-z][A-Za-z\s]*$/);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

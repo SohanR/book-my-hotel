@@ -48,7 +48,7 @@ const Dashboard = () => {
               <h2>Your Bookings</h2>
             </div>
             <div className='col-md-2'>
-              <Link to='/' className='btn btn-primary' > Browse Hotels</Link>
+              <Link to='/hotels' className='btn btn-primary' > Browse Hotels</Link>
             </div>
           </div>    
 

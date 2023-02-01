@@ -60,7 +60,7 @@ const TopNav = () => {
 
 <div className='account' >
 {auth !== null && (
-            <Link className="dashboard" to="/dashboard"><BsPerson /> Dashboard</Link>
+            <Link className="dashboard" to="user/dashboard"><BsPerson /> Dashboard</Link>
           )}
           {auth !== null && (
               <button  onClick={logout} className="btn btn-outline-danger m-r-3">Logout</button>
