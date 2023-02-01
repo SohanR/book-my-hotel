@@ -172,9 +172,9 @@ export const searchListings = async (req, res) =>{
     const {location,date,bed} = req.body
     
     //console.log(location,date,bed);
-    let result = await Hotel.find({from:{$gte: new Date()}, to:{$gte:new Date()}, location})
+    let result = await Hotel.find({location:{$regex: new RegExp(location) }})
     .select("-image.data")
-    .exec()
+    .exec() 
 
     res.json(result)
-}
+}   
