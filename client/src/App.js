@@ -5,6 +5,7 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Home from "./booking/Home";
 import Hotels from "./booking/Hotels";
+import Error from "./components/Error";
 import Footer from "./components/Footer";
 import Offer from "./components/Offer";
 import PrivateRoute from "./components/PrivateRoute";
@@ -37,15 +38,16 @@ function App() {
         <Route exact path="/register" element={<Register/>} />
         <Route exact path="/hotel/:hotelId" element={<ViewHotel/>} />
         <Route exact path="/search-result" element={<SearchResult/>} />
-        <Route path="/*" element={<PrivateRoute/>}>
+        <Route path='user' element={<PrivateRoute/>}>          
           <Route path="dashboard" element={<Dashboard/>} />
           <Route path="dashboard/Seller" element={<DashboardSeller/>} />
           <Route path="hotels/new" element={<NewHotel/>} />
           <Route path="hotel/edit/:hotelId" element={<EditHotels/>} />
           <Route path="stripe/callback" element={<StripeCallback/>} />
           <Route path="stripe/success/:hotelId" element={<StripeSuccess/>} />
-          <Route path="stripe/cancel" element={<StripeCancel/>} />
-        </Route>
+          <Route path="stripe/cancel" element={<StripeCancel/>} />          
+        </Route>  
+        <Route path="/*" element={<Error/>} />      
       </Routes>
       <Footer/>
     </BrowserRouter>
